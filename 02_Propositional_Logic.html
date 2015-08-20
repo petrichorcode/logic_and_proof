@@ -1,0 +1,1424 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2015-08-20 Thu 00:13 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Logic and Proof</title>
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="[[http://www.andrew.cmu.edu/user/avigad][Jeremy Avigad]]Jeremy Avigad, [[http://https://www.andrew.cmu.edu/user/rlewis1/][Robert Y. Lewis]]Robert Y. Lewis,  [[http://http://www.contrib.andrew.cmu.edu/~fpv/][Floris van Doorn]]Floris van Doorn" />
+<link rel="stylesheet" href="css/tutorial.css"/>
+<link rel="stylesheet" href="css/code.css"/>
+<script type="text/javascript" charset="utf-8">if(!window.PolymerGestures) { var head = document.getElementsByTagName('head')[0]; var js = document.createElement("script"); js.type = "text/javascript"; js.src = "//cdn.jsdelivr.net/polymer.platform/0.4.2/platform.js"; head.appendChild(js); } </script>
+<link rel='import' href='juicy-ace-editor.html'/>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Logic and Proof</h1>
+
+<div id="outline-container-orgheadline18" class="outline-2">
+<h2 id="orgheadline18"><span class="section-number-2"> 2</span> Propositional Logic</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-orgheadline1" class="outline-3">
+<h3 id="orgheadline1"><span class="section-number-3"> 2.1</span> A Puzzle</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+The following puzzle, titled "Malice and Alice" is from George
+J. Summers, <i>Logical Deduction Puzzles</i>.
+</p>
+<hr  />
+<p>
+Alice, Alice's husband, their son, their daughter, and Alice's brother
+were involved in a murder. One of the five killed one of the other
+four. The following facts refer to the five people mentioned:
+</p>
+
+<ol class="org-ol">
+<li>A man and a woman were together in a bar at the time of the murder.</li>
+<li>The victim and the killer were together on a beach at the time of
+the murder.</li>
+<li>One of Alice's children was alone at the time of the murder.</li>
+<li>Alice and her husband were not together at the time of the murder.</li>
+<li>The victim's twin was not the killer.</li>
+<li>The killer was younger than the victim.</li>
+</ol>
+
+<p>
+Which one of the five was the victim?
+</p>
+<hr  />
+
+<p>
+Take the time to try to work out a solution. Summers' book offers the
+following hint: "First find the locations of two pairs of people at
+the time of the murder, and then determine who the killer and the
+victim were so that no condition is contradicted."
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2"><span class="section-number-3"> 2.2</span> A Solution</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+If you have worked on the puzzle, you may have noticed a few
+things. First, it is helpful to draw a diagram, and be systematic
+about searching for an answer. The number of characters, locations,
+and attributes (murderer, victim) is finite, so that there are only
+finitely many possible "states of affairs" that need to be
+considered. The numbers are also small enough so that systematic
+search through all the possibilities, though tedious, will eventually
+get you to the right answer.
+</p>
+
+<p>
+Another thing that you may have noticed is that the question seems to
+presuppose that there is a unique answer to the question, which is to
+say, of all the states of affairs that meet the list of conditions,
+there is only one person who can possibly be the killer. <i>A priori</i>,
+without that assumption, there is a difference between finding <i>some</i>
+person who could have been the victim, and show that that person <i>had</i>
+to be the victim. Thus, there is a difference between exhibiting some
+state of affairs that meets the criteria, and proving that one of the
+characters <i>had</i> to be the victim, which is to say, demonstrating
+conclusively that no other solution is possible.
+</p>
+
+<p>
+The published solution in the book not only produces a state of
+affairs that meets the criterion, but at the same time proves that
+this is the only one that does so. It is quoted below, in full.
+</p>
+
+<hr  />
+<p>
+From <code>[1]</code>, <code>[2]</code>, and <code>[3]</code>, the roles of the five people were as
+follows: Man and Woman in the bar, Killer and Victim on the beach, and
+Child alone.
+</p>
+
+<p>
+Then, from <code>[4]</code>, either Alice's husband was in the bar and Alice was
+on the beach, or Alice was in the bar and Alice's husband was on the
+beach.
+</p>
+
+<p>
+If Alice's husband was in the bar, the woman he was with was his
+daughter, the child who was alone was his son, and Alice and her
+brother were on the beach. Then either Alice or her brother was the
+victim; so the other was the killer. But, from <code>[5]</code>, the victim had a
+twin, and this twin was innocent. Since Alice and her brother could
+only be twins to each other, this situation is impossible. Therefore
+Alice's husband was not in the bar.
+</p>
+
+<p>
+So Alice was in the bar. If Alice was in the bar, she was with her
+brother or her son.
+</p>
+
+<p>
+If Alice was with her brother, her husband was on the beach with one
+of the two children. From <code>[5]</code>, the victim could not be her husband,
+because none of the others could be his twin; so the killer was her
+husband and the victim was the child he was with. But this situation
+is impossible, because it contradicts <code>[6]</code>. Therefore, Alice was not
+with her brother in the bar. 
+</p>
+
+<p>
+So Alice was with her son in the bar. Then the child who was alone was
+her daughter. Therefore, Alice's husband was with Alice's brother on
+the beach. From previous reasoning, the victim could not be Alice's
+husband. But the victim could be Alice's brother because Alice could
+be his twin. 
+</p>
+
+<p>
+So <i>Alice's brother was the victim</i> and Alice's husband was the
+killer.
+</p>
+<hr  />
+
+<p>
+This argument relies on some "extra logical" elements, for example,
+that a father cannot be younger than his child, and that a parent and
+his or her child cannot be twins. But there are also a number of
+common logical terms, and associated patterns of inference. In the
+next section, we will focus on some of the rules governing the terms
+"and," "or," "not," and "if &#x2026; then". Following the model described
+in the introduction, each such construction will be analyzed on three
+levels:
+</p>
+<ul class="org-ul">
+<li>the way it is used and employed in informal (mathematical) arguments</li>
+<li>a formal, symbolic representation</li>
+<li>the implementation in <i>Lean</i></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline10" class="outline-3">
+<h3 id="orgheadline10"><span class="section-number-3"> 2.3</span> Rules of Inference</h3>
+<div class="outline-text-3" id="text-1-3">
+</div><div id="outline-container-orgheadline3" class="outline-4">
+<h4 id="orgheadline3"><span class="section-number-4"> 2.3.1</span> Implication</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<p>
+The first pattern of reasoning we will discuss, involving "if
+&#x2026; then," may be the most confusing, because its use is largely
+implicit in the solution above. Consider the fourth paragraph. Spelled
+out in greater detail, the inference runs as follows:
+</p>
+
+<hr  />
+<p>
+If Alice was in the bar, Alice was with her brother or son.
+</p>
+
+<p>
+Alice was in the bar.
+</p>
+
+<p>
+Alice was with her brother or son.
+</p>
+<hr  />
+
+<p>
+This rule is sometimes known as <i>modus ponens</i>, or "implication
+elimination," since it tells us how to use an implication in an
+argument. In a system of natural deduction, it is expressed as
+follows:
+</p>
+
+<div class="figure">
+<p><img src="ltxpng/02_Propositional_Logic.org.temp_46e555e7ba4fd0b0cb485c3438348fc25fca3f7d.png" alt="\begin{center}
+\AXM{A \to B}
+\AXM{A}
+\RL{$\mathord{\to}\mathrm{E}$}
+\BIM{B}
+\DP
+\end{center}
+" /></p>
+</div>
+<p>
+The way to read this is as follows: if you have a proof of <img src="ltxpng/02_Propositional_Logic.org.temp_de9a2541df57adb5d4ef809a251381d580bbf931.png" alt="$A \to
+B$" />, possibly from some hypotheses, and a proof of <img src="ltxpng/02_Propositional_Logic.org.temp_cfd84d0cf5b16a0279ed47d0d5204f0d029e1098.png" alt="$A$" />, possibly
+from hypotheses, then combining these yields a proof of <img src="ltxpng/02_Propositional_Logic.org.temp_d97dc406cb5606cb9d7e849c11adc553d50b79a6.png" alt="$B$" />, from the
+hypotheses in both subproofs.
+</p>
+
+<p>
+In Lean, the inference is expressed as follow:
+</p>
+<div class="org-src-container">
+<juicy-ace-editor id='lean-juicy-ace-editor-1' mode="ace/mode/lean" readonly="true">variables (A B : Prop)
+premises (H₁ : A → B) (H₂ : A)
+
+example : B := 
+show B, from H₁ H₂
+</juicy-ace-editor><div id='lean-full-code-1' style='display:none'>variables (A B : Prop)
+premises (H₁ : A → B) (H₂ : A)
+
+example : B := 
+show B, from H₁ H₂
+</div><div class='no-print' align="left"><button type="button" onclick="invoke_leanjs($('#lean-full-code-1').text());">Try it yourself &raquo;</button></div>
+</div>
+<p>
+The first command declares two variables, <code>A</code> and <code>B</code>, ranging over
+propositions. The second line introduces two premises, namely, <code>A → B</code>
+and <code>A</code>. The next line asserts, as an example, that <code>B</code> follows from
+the premises. The proof is written simply <code>H₁ H₂</code>: think of this as
+the premise <code>H₁</code> "applied to" the premise <code>H₂</code>. 
+</p>
+
+<p>
+You can enter the arrow by writing <code>\to</code> or <code>\imp</code> or <code>\r</code>. You can
+enter <code>H₁</code> by typing <code>H\_1</code>. It is conventional to use the letter <code>H</code>
+for a hypothesis, but you can use any reasonable alphanumeric
+identifier. The name <code>H1</code> is a different from <code>H₁</code>, but also a
+reasonable choice.
+</p>
+
+<p>
+The rule for proving an "if &#x2026; then" statement is more
+subtle. Consider the beginning of the third paragraph, which argues
+that if Alice's husband was in the bar, then Alice or her brother
+was the victim. Abstracting away some of the details, the argument has
+the following form:
+</p>
+
+<hr  />
+<p>
+Suppose Alice's husband was in the bar.
+</p>
+
+<p>
+Then &#x2026;
+</p>
+
+<p>
+Then &#x2026;
+</p>
+
+<p>
+Then Alice or her brother was the victim.
+</p>
+
+<p>
+Thus, if Alice's husband was in the bar, then Alice or her brother was the victim.
+</p>
+<hr  />
+<p>
+This is a form of <i>hypothetical reasoning</i>. On the supposition that
+<img src="ltxpng/02_Propositional_Logic.org.temp_cfd84d0cf5b16a0279ed47d0d5204f0d029e1098.png" alt="$A$" /> holds, we argue that <img src="ltxpng/02_Propositional_Logic.org.temp_d97dc406cb5606cb9d7e849c11adc553d50b79a6.png" alt="$B$" /> holds as well. If we have successful, we
+have shown that <img src="ltxpng/02_Propositional_Logic.org.temp_cfd84d0cf5b16a0279ed47d0d5204f0d029e1098.png" alt="$A$" /> implies <img src="ltxpng/02_Propositional_Logic.org.temp_d97dc406cb5606cb9d7e849c11adc553d50b79a6.png" alt="$B$" />, without supposing <img src="ltxpng/02_Propositional_Logic.org.temp_cfd84d0cf5b16a0279ed47d0d5204f0d029e1098.png" alt="$A$" />. In other
+words, the temporary assumption that <img src="ltxpng/02_Propositional_Logic.org.temp_cfd84d0cf5b16a0279ed47d0d5204f0d029e1098.png" alt="$A$" /> holds is "canceled" by
+making it explicit in the conclusion.
+</p>
+
+<div class="figure">
+<p><img src="ltxpng/02_Propositional_Logic.org.temp_77512ca0d4ef46d58fa78c607991904e68305e88.png" alt="\begin{center}
+\AXM{}
+\UIM{H : A}
+\noLine
+\UIM{\vdots}
+\noLine
+\UIM{\psi}
+\RL{$\mathord{\to}\mathrm{I}, H$}
+\UIM{A \to B}
+\DP
+\end{center}
+" /></p>
+</div>
+<p>
+The hypothesis is given the label <img src="ltxpng/02_Propositional_Logic.org.temp_5036dd76902b97a998bc024eb115e3b1e701dbb8.png" alt="$H$" />; when the introduction rule is
+applied, the label <img src="ltxpng/02_Propositional_Logic.org.temp_5036dd76902b97a998bc024eb115e3b1e701dbb8.png" alt="$H$" /> indicates the relevant hypothesis. The line
+over the hypothesis indicates that the assumption has been "canceled"
+by the introduction rule.
+</p>
+
+<p>
+In Lean, this inference takes the following form:
+</p>
+<div class="org-src-container">
+<juicy-ace-editor id='lean-juicy-ace-editor-2' mode="ace/mode/lean" readonly="true">variables (A B : Prop)
+
+example : A → B :=
+assume H : A,
+show B, from sorry
+</juicy-ace-editor><div id='lean-full-code-2' style='display:none'>variables (A B : Prop)
+
+example : A → B :=
+assume H : A,
+show B, from sorry
+</div><div class='no-print' align="left"><button type="button" onclick="invoke_leanjs($('#lean-full-code-2').text());">Try it yourself &raquo;</button></div>
+</div>
+<p>
+To prove <code>A → B</code>, we assume <code>A</code>, with label <code>H</code>, and show <code>B</code>. Here,
+the word <code>sorry</code> indicates that the proof is omitted. In this case,
+this is necessary; since <code>A</code> and <code>B</code> are arbitrary propositions, there
+is no way to prove <code>B</code> from <code>A</code>. In general, though, <code>A</code> and <code>B</code> will
+be compound expressions, and you are free to use the hypothesis <code>H :
+A</code> to prove <code>B</code>.
+</p>
+
+<p>
+Using <code>sorry</code>, we can illustrate the implication elimination rule
+alternatively as follows:
+</p>
+<div class="org-src-container">
+<juicy-ace-editor id='lean-juicy-ace-editor-3' mode="ace/mode/lean" readonly="true">variables (A B : Prop)
+
+example : B :=
+have H₁ : A → B, from sorry,
+have H₂ : A, from sorry,
+show B, from H₁ H₂
+</juicy-ace-editor><div id='lean-full-code-3' style='display:none'>variables (A B : Prop)
+
+example : B :=
+have H₁ : A → B, from sorry,
+have H₂ : A, from sorry,
+show B, from H₁ H₂
+</div><div class='no-print' align="left"><button type="button" onclick="invoke_leanjs($('#lean-full-code-3').text());">Try it yourself &raquo;</button></div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-4">
+<h4 id="orgheadline4"><span class="section-number-4"> 2.3.2</span> Conjunction</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<p>
+As was the case for implication, other logical connectives are
+generally characterized by their <i>introduction</i> and <i>elimination</i>
+rules. The former show how to establish a claim involving the
+connective, while the latter show how to use such a claim to derive
+others.
+</p>
+
+<p>
+Let us consider, for example, the case of conjunction, that is, the
+word "and." Informally, we establish a conjunction by establishing
+each conjunct. For example, informally we might argue:
+</p>
+<hr  />
+<p>
+Alice's brother was the victim.
+</p>
+
+<p>
+Alice's husband was the killer.
+</p>
+
+<p>
+Therefore Alice's brother was the victim and Alice's husband was the
+killer.
+</p>
+<hr  />
+<p>
+The inference seems superfluous, since the word "and" simply combines the
+two assertions into one, and informal proofs often downplay the
+distinction. In natural deduction, the rule reads as follows:
+</p>
+
+<div class="figure">
+<p><img src="ltxpng/02_Propositional_Logic.org.temp_e9d7aa9ab635288efefe04fab432a2a0c8c41cde.png" alt="\begin{center}
+\AXM{A}
+\AXM{B}
+\RL{$\mathord{\wedge}\mathrm{I}$}
+\BIM{A \wedge B}
+\DP
+\end{center}
+" /></p>
+</div>
+<p>
+In Lean, the rule is denoted <code>and.intro</code>:
+</p>
+<div class="org-src-container">
+<juicy-ace-editor id='lean-juicy-ace-editor-4' mode="ace/mode/lean" readonly="true">variables (A B : Prop)
+
+example : A ∧ B :=
+have H₁ : A, from sorry,
+have H₂ : B, from sorry,
+show A ∧ B, from and.intro H₁ H₂
+</juicy-ace-editor><div id='lean-full-code-4' style='display:none'>variables (A B : Prop)
+
+example : A ∧ B :=
+have H₁ : A, from sorry,
+have H₂ : B, from sorry,
+show A ∧ B, from and.intro H₁ H₂
+</div><div class='no-print' align="left"><button type="button" onclick="invoke_leanjs($('#lean-full-code-4').text());">Try it yourself &raquo;</button></div>
+</div>
+<p>
+You can enter the wedge symbol by typing <code>\and</code>.
+</p>
+
+<p>
+The two elimination rules allow us to extract the two components:
+</p>
+<hr  />
+<p>
+Alice's husband was in the bar and Alice was on the beach.
+</p>
+
+<p>
+So Alice's husband was in the bar.
+</p>
+<hr  />
+<p>
+Or:
+</p>
+<hr  />
+<p>
+Alice's husband was in the bar and Alice was on the beach.
+</p>
+
+<p>
+So Alice's was on the beach.
+</p>
+<hr  />
+<p>
+In natural deduction, these patterns are rendered as follows:
+</p>
+
+<div class="figure">
+<p><img src="ltxpng/02_Propositional_Logic.org.temp_4163d798cb8693449cd79dd382e2644b4b647154.png" alt="\begin{center}
+\AXM{A \wedge B}
+\RL{$\mathord{\land}\mathrm{E_1}$}
+\UIM{A}
+\DP
+\quad
+\AXM{A \wedge B}
+\RL{$\mathord{\land}\mathrm{E_2}$}
+\UIM{B}
+\DP
+\end{center}
+" /></p>
+</div>
+<p>
+In Lean, the inferences are known as <code>and.left</code> and <code>and.right</code>:
+</p>
+<div class="org-src-container">
+<juicy-ace-editor id='lean-juicy-ace-editor-5' mode="ace/mode/lean" readonly="true">variables (A B : Prop)
+
+example : A :=
+have H : A ∧ B, from sorry,
+show A, from and.left H
+
+example : B :=
+have H : A ∧ B, from sorry,
+show B, from and.right H
+</juicy-ace-editor><div id='lean-full-code-5' style='display:none'>variables (A B : Prop)
+
+example : A :=
+have H : A ∧ B, from sorry,
+show A, from and.left H
+
+example : B :=
+have H : A ∧ B, from sorry,
+show B, from and.right H
+</div><div class='no-print' align="left"><button type="button" onclick="invoke_leanjs($('#lean-full-code-5').text());">Try it yourself &raquo;</button></div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-4">
+<h4 id="orgheadline5"><span class="section-number-4"> 2.3.3</span> Negation and Falsity</h4>
+<div class="outline-text-4" id="text-1-3-3">
+<p>
+In logical terms, showing "not A" amounts to showing that A leads to a
+contradiction. For example:
+</p>
+<hr  />
+<p>
+Suppose Alice's husband was in the bar. 
+</p>
+
+<p>
+&#x2026;
+</p>
+
+<p>
+This situation is impossible. 
+</p>
+
+<p>
+Therefore Alice's husband was not in the bar.
+</p>
+<hr  />
+<p>
+This is another form of hypothetical reasoning, similar to that used
+in establishing an "if &#x2026; then" statement: we temporarly assume A,
+show that leads to a contradiction, and conclude that "not A"
+holds.
+</p>
+
+<p>
+In natural deduction, the rule reads as follows:
+</p>
+
+<div class="figure">
+<p><img src="ltxpng/02_Propositional_Logic.org.temp_ff94c0ca008f6e11baef670e87f7e253496279bb.png" alt="\begin{center}
+\AXM{}
+\UIM{A}
+\noLine
+\UIM{\vdots}
+\noLine
+\UIM{\bot}
+\RL{$\lnot \mathrm{I}$}
+\UIM{\lnot A}
+\DP
+\end{center}
+" /></p>
+</div>
+<p>
+In Lean, it is illustrated by the following:
+</p>
+<div class="org-src-container">
+<juicy-ace-editor id='lean-juicy-ace-editor-6' mode="ace/mode/lean" readonly="true">variable A : Prop
+
+example : ¬ A :=
+assume H : A,
+show false, from sorry
+</juicy-ace-editor><div id='lean-full-code-6' style='display:none'>variable A : Prop
+
+example : ¬ A :=
+assume H : A,
+show false, from sorry
+</div><div class='no-print' align="left"><button type="button" onclick="invoke_leanjs($('#lean-full-code-6').text());">Try it yourself &raquo;</button></div>
+</div>
+<p>
+You can enter the negation symbol by typing <code>\not</code>.
+</p>
+
+<p>
+The elimination rule is dual to these. It expresses that if we have
+both "A" and "not A," then we have a contradiction. This pattern is
+illustrated in the informal argument below, which is implicit in the
+fourth paragraph of the solution to "Malice and Alice."
+</p>
+<hr  />
+<p>
+So the killer was her husband and the victim was the child he was
+with.
+</p>
+
+<p>
+So the killer was not younger than his victim.
+</p>
+
+<p>
+But according to <code>[6]</code>, the killer was younger than his victim.
+</p>
+
+<p>
+This situation is impossible.
+</p>
+<hr  />
+<p>
+In symbolic logic, the rule of inference is expressed as follows:
+</p>
+
+<div class="figure">
+<p><img src="ltxpng/02_Propositional_Logic.org.temp_8b5a7732365a9df58572ccbd050107efc4886936.png" alt="\begin{center}
+\AXM{\lnot A}
+\AXM{A}
+\RL{$\lnot \mathrm{E}$}
+\BIM{\bot}
+\DP
+\end{center}
+" /></p>
+</div>
+<p>
+And in Lean, it is implemented in the following way:
+</p>
+<div class="org-src-container">
+<juicy-ace-editor id='lean-juicy-ace-editor-7' mode="ace/mode/lean" readonly="true">variable A : Prop
+
+example : false :=
+have H₁ : ¬ A, from sorry,
+have H₂ : A, from sorry,
+show false, from H₁ H₂
+</juicy-ace-editor><div id='lean-full-code-7' style='display:none'>variable A : Prop
+
+example : false :=
+have H₁ : ¬ A, from sorry,
+have H₂ : A, from sorry,
+show false, from H₁ H₂
+</div><div class='no-print' align="left"><button type="button" onclick="invoke_leanjs($('#lean-full-code-7').text());">Try it yourself &raquo;</button></div>
+</div>
+<p>
+Notice that the negation elimination rule is expressed in a manner
+similar to implication elimination: the label asserting the negation
+comes first, and by "applying" the proof of the negation to the
+proof of the positive fact, we obtain a proof of falsity.
+</p>
+
+<p>
+Notice that in the symbolic framework, we have introduced a new
+symbol, <img src="ltxpng/02_Propositional_Logic.org.temp_7bea1d03799b42f9b799647895fded7894b866bd.png" alt="$\bot$" />. It corresponds to the identifier <code>false</code> in Lean, and
+natural language phrases like "this is a contradiction" or "this is
+impossible". 
+</p>
+
+<p>
+What are the rules governing <img src="ltxpng/02_Propositional_Logic.org.temp_7bea1d03799b42f9b799647895fded7894b866bd.png" alt="$\bot$" />? In natural deduction, there is no
+introduction rule; "false" is false, and there should be no way to
+prove it, other than extract it from contradictory hypotheses. On the
+other hand, natural deduction provides a rule that allows us to
+conclude anything from a contradiction:
+</p>
+
+<div class="figure">
+<p><img src="ltxpng/02_Propositional_Logic.org.temp_35288078004ded57eb23278afd8e956911584b5a.png" alt="\begin{center}
+\AXM{\bot}
+\RL{$\bot \mathrm{E}$}
+\UIM{A}
+\DP
+\end{center}
+" /></p>
+</div>
+<p>
+The elimination rule also has the fancy Latin name, <i>ex falso
+sequitur quodlibet</i>, which means ``anything you want follows from
+falsity.'' In Lean it is implemented as follows:
+</p>
+<div class="org-src-container">
+<juicy-ace-editor id='lean-juicy-ace-editor-8' mode="ace/mode/lean" readonly="true">variable A : Prop
+
+example : A :=
+have H : false, from sorry,
+show A, from false.elim H
+</juicy-ace-editor><div id='lean-full-code-8' style='display:none'>variable A : Prop
+
+example : A :=
+have H : false, from sorry,
+show A, from false.elim H
+</div><div class='no-print' align="left"><button type="button" onclick="invoke_leanjs($('#lean-full-code-8').text());">Try it yourself &raquo;</button></div>
+</div>
+<p>
+The false elimination rule is harder to motivate from a natural
+language perspective, but, nonetheless, it is really needed to capture
+common patterns of inference. One way to understand it is
+this. Consider the following statement:
+</p>
+<hr  />
+<p>
+For every natural number <img src="ltxpng/02_Propositional_Logic.org.temp_6456f2649ddade5686905f71bd3d22a9376cf8af.png" alt="$n$" />, if <img src="ltxpng/02_Propositional_Logic.org.temp_6456f2649ddade5686905f71bd3d22a9376cf8af.png" alt="$n$" /> is prime and greater than 2, then
+<img src="ltxpng/02_Propositional_Logic.org.temp_6456f2649ddade5686905f71bd3d22a9376cf8af.png" alt="$n$" /> is odd.
+</p>
+<hr  />
+<p>
+We would like to say that this is a true statement. But if it is true,
+then it is true of any number <img src="ltxpng/02_Propositional_Logic.org.temp_6456f2649ddade5686905f71bd3d22a9376cf8af.png" alt="$n$" />. Taking <img src="ltxpng/02_Propositional_Logic.org.temp_e62b3f122ad8b60e27eb1c9a46bee4bb6f8ec5d5.png" alt="$n = 2$" />, we have the
+statement:
+</p>
+<hr  />
+<p>
+If 2 is prime and greater than 2, then 2 is odd.
+</p>
+<hr  />
+<p>
+In this conditional statement, both the antecedent and succedent are
+false. The fact that we are committed to saying that this statement is
+true shows that we should be able to prove, one way or another, that
+the statement 2 is odd follows from the false statement that 2 is
+prime and greater than 2. The <i>ex falso</i> neatly encapsulates this sort
+of inference.
+</p>
+
+<p>
+Notice that if we define <img src="ltxpng/02_Propositional_Logic.org.temp_c9fc0b9f87a04276e5274737b465662205a69233.png" alt="$\neg A$" /> to be <img src="ltxpng/02_Propositional_Logic.org.temp_9eb1ac6b4f02410feea1ca6215e48d255300a699.png" alt="$A \to \bot$" />, then the rules
+for negation introduction and elimination are nothing more than
+implication introduction and elimination, respectively. We have think
+of <img src="ltxpng/02_Propositional_Logic.org.temp_c9fc0b9f87a04276e5274737b465662205a69233.png" alt="$\neg A$" /> expressed colorfully by saying "if <img src="ltxpng/02_Propositional_Logic.org.temp_cfd84d0cf5b16a0279ed47d0d5204f0d029e1098.png" alt="$A$" /> is true, then pigs
+have wings," where "pigs have wings" is stands for <img src="ltxpng/02_Propositional_Logic.org.temp_7bea1d03799b42f9b799647895fded7894b866bd.png" alt="$\bot$" />.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-4">
+<h4 id="orgheadline6"><span class="section-number-4"> 2.3.4</span> Disjunction</h4>
+<div class="outline-text-4" id="text-1-3-4">
+<p>
+The introduction rules for disjunction, otherwise known as "or," are
+straightforward. For example, the claim that condition <code>[3]</code> is met in
+the proposed solution can be justified as follows:
+</p>
+<hr  />
+<p>
+Alice's daughter was alone at the time of the murder.
+</p>
+
+<p>
+Therefore, either Alice's daughter was alone at the time of the
+murder, or Alice's son was alone at the time of the murder.
+</p>
+<hr  />
+<p>
+In terms of natural deduction, the two introduction rules are as
+follows:
+</p>
+
+<div class="figure">
+<p><img src="ltxpng/02_Propositional_Logic.org.temp_91056b621fca4f8d7d22dec2f36b015eedb42cdb.png" alt="\begin{center}
+\AXM{A}
+\RL{$\mathord{\lor}\mathrm{I_l}$}
+\UIM{A \lor B}
+\DP
+\quad
+\AXM{B}
+\RL{$\mathord{\lor}\mathrm{I_r}$}
+\UIM{A \lor B}
+\DP
+\end{center}
+" /></p>
+</div>
+<p>
+Here, the <img src="ltxpng/02_Propositional_Logic.org.temp_8e7cc17c0678c6cd1ba29f5c0c00a45cbf4af413.png" alt="$l$" /> and <img src="ltxpng/02_Propositional_Logic.org.temp_b643064d0f5fa210f63ec304fb6f3d71fa382d67.png" alt="$r$" /> stand for "left" and "right". In Lean, they are
+implemented as follows:
+</p>
+<div class="org-src-container">
+<juicy-ace-editor id='lean-juicy-ace-editor-9' mode="ace/mode/lean" readonly="true">variables (A B : Prop)
+
+example : A ∨ B :=
+have H : A, from sorry,
+show A ∨ B, from or.inl H
+</juicy-ace-editor><div id='lean-full-code-9' style='display:none'>variables (A B : Prop)
+
+example : A ∨ B :=
+have H : A, from sorry,
+show A ∨ B, from or.inl H
+</div><div class='no-print' align="left"><button type="button" onclick="invoke_leanjs($('#lean-full-code-9').text());">Try it yourself &raquo;</button></div>
+</div>
+<p>
+You can enter the vee symbol by typing <code>\or</code>. The identifiers <code>inl</code>
+and <code>inr</code> stand for "insert left" and "insert right," respectively.
+</p>
+
+<p>
+The disjunction elimination rule is trickier, but it represents a
+natural form of case-based hypothetical reasoning. The instances that
+occur in the solution to "Malice and Alice" are all special cases of
+this rule, so it will be helpful to make up a new example. Suppose, in
+the argument above, we had established that either Alice's brother or
+her son was in the bar, and we wanted to argue for the conclusion that
+her husband was on the beach. One option is to argue by cases: first,
+consider the case that her brother was in the bar, and argue for the
+conclusion on the basis of that assumption; then consider the case
+that her son was in the bar, and argue for the same conclusion, this
+time on the basis of the second assumption. Since the two cases are
+exhaustive, if we know that the conclusion holds in each case, we know
+that it holds outright. The pattern looks something like this:
+</p>
+<hr  />
+<p>
+Either Alice's brother was in the bar, or Alice's son was in the bar.
+</p>
+
+<p>
+Suppose, in the first case, that her brother was in the bar. Then
+&#x2026; Therefore, her husband was on the beach.
+</p>
+
+<p>
+On the other hand, suppose her son was in the bar. In that case,
+&#x2026; Therefore, in this case also, her husband was on the beach.
+</p>
+
+<p>
+Either way, we have established that her husband was on the beach.
+</p>
+<hr  />
+<p>
+In natural deduction, this pattern is expressed as follows:
+</p>
+
+<div class="figure">
+<p><img src="ltxpng/02_Propositional_Logic.org.temp_19b386f65fc15fc63ba340f4fe7bf636ff37d26c.png" alt="\begin{center}
+\AXM{A \vee B}
+\AXM{}
+\UIM{A}
+\noLine
+\UIM{\vdots}
+\noLine
+\UIM{C}
+\AXM{}
+\UIM{B}
+\noLine
+\UIM{\vdots}
+\noLine
+\UIM{C}
+\RL{$\mathord{\lor}\mathrm{E}$}
+\TIM{C}
+\DP
+\end{center}
+" /></p>
+</div>
+<p>
+And here it is in Lean:
+</p>
+<div class="org-src-container">
+<juicy-ace-editor id='lean-juicy-ace-editor-10' mode="ace/mode/lean" readonly="true">variables (A B C : Prop)
+
+example : C :=
+have H : A ∨ B, from sorry,
+show C, from or.elim H
+  (assume H₁ : A,
+    show C, from sorry)
+  (assume H₂ : B,
+    show C, from sorry)
+</juicy-ace-editor><div id='lean-full-code-10' style='display:none'>variables (A B C : Prop)
+
+example : C :=
+have H : A ∨ B, from sorry,
+show C, from or.elim H
+  (assume H₁ : A,
+    show C, from sorry)
+  (assume H₂ : B,
+    show C, from sorry)
+</div><div class='no-print' align="left"><button type="button" onclick="invoke_leanjs($('#lean-full-code-10').text());">Try it yourself &raquo;</button></div>
+</div>
+<p>
+What makes this pattern confusing is that it requires to instances of
+nested hypothetial reasoning: in the first block of parentheses, we
+temporarily assume <code>A</code>, and in the second block, we temporarily assume
+<code>B</code>. When the dust settles, we have established <code>C</code> outright.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-4">
+<h4 id="orgheadline7"><span class="section-number-4"> 2.3.5</span> Bi-implication</h4>
+<div class="outline-text-4" id="text-1-3-5">
+<p>
+"If and only if"
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-4">
+<h4 id="orgheadline8"><span class="section-number-4"> 2.3.6</span> True</h4>
+</div>
+
+<div id="outline-container-orgheadline9" class="outline-4">
+<h4 id="orgheadline9"><span class="section-number-4"> 2.3.7</span> Proof by Contradiction</h4>
+</div>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-3">
+<h3 id="orgheadline11"><span class="section-number-3"> 2.4</span> Writing Proofs in Natural Deduction</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+As noted in Chapter <a href="#" onclick="myModule.loadTutorial('01_Introduction.html', 'MissingReference')">Introduction</a>, there are two common styles for
+writing natural deduction derivations. (The word "derivation" is often
+used to connote a formal proof instead of an informal one. When
+talking about natural deduction, we will use the words "derivation"
+and "proof" interchangeably.) In both cases, proofs are presented on
+paper as trees, with the conclusion at the theorem at the root, and
+hypotheses up at the leaves. In the first style of presentation, the
+set of hypotheses is written explicitly at every node of the
+tree. This is helpful because some rules (namely, implication
+introduction, negation introduction, or elimination, and proof by
+contradiction) change the set of hypotheses, by canceling a local or
+temporary assumption. Nonetheless, we will use a style of presentation
+that leaves this information implicit, so that each node of the tree
+is labelled with an explicit formula. Some people like to label each
+inference with the rule that is used, but that is usually clear from
+the context, so we will omit that as well. But when a rule cancels a
+hypothesis, we will make that clear in the following way: we will
+label all instances of the hypothesis at the leaves with a letter,
+like "x," and then we will use that letter to annotate the place where
+the rule is canceled.
+</p>
+
+<p>
+In addition to all the rules listed in the last section, there is one
+additional rule that is central to the system, namely the assumption
+rule. It works like this: at any point, you can assume a hypothesis,
+<img src="ltxpng/02_Propositional_Logic.org.temp_cfd84d0cf5b16a0279ed47d0d5204f0d029e1098.png" alt="$A$" />. The way to "read" such a one-line proof is this: assuming <img src="ltxpng/02_Propositional_Logic.org.temp_cfd84d0cf5b16a0279ed47d0d5204f0d029e1098.png" alt="$A$" />,
+you have proved <img src="ltxpng/02_Propositional_Logic.org.temp_cfd84d0cf5b16a0279ed47d0d5204f0d029e1098.png" alt="$A$" />. Without this rule, there would be no way of
+getting a proof of the ground! After all, every rule listed in the
+last section has premises, which is to say, it can only be applied to
+derivations that have been constructed previously.
+</p>
+
+<p>
+Let us consider a few examples. In each case, you should think about
+what the formulas say and which rule of inference is invoked at each
+step. Also pay close attention to which hypotheses are canceled at
+each stage. If you look at any node of the tree, what has been
+established at that point is that the claim follows from the
+uncanceled hypotheses. Here is a proof of <img src="ltxpng/02_Propositional_Logic.org.temp_2d65acc830c8d46eb73f2e1e35c94aa726174eec.png" alt="$(A \wedge (B \vee C)) \to
+((A \wedge B) \vee (A \wedge C))$" />:
+</p>
+
+<div class="figure">
+<p><img src="ltxpng/02_Propositional_Logic.org.temp_f8b2cc707e139e4a1e14fd8766d5972b29026f6c.png" alt="\begin{prooftree}
+\AXM{}
+\UIM{y : A \wedge (B \vee C)}
+\UIM{B \vee C}
+\AXM{}
+\UIM{y : A \wedge (B \vee C)}
+\UIM{A}
+\AXM{}
+\UIM{x : B}
+\BIM{A \wedge B}
+\UIM{(A \wedge B) \vee (A \wedge C)}
+\AXM{}
+\UIM{y : A \wedge (B \vee C)}
+\UIM{A}
+\AXM{}
+\UIM{x : C}
+\BIM{A \wedge C}
+\UIM{(A \wedge B) \vee (A \wedge C)}
+\RLM{x}
+\TIM{(A \wedge B) \vee (A \wedge C)}
+\RLM{y}
+\UIM{(A \wedge (B \vee C)) \to ((A \wedge B) \vee
+  (A \wedge C))}
+\end{prooftree}
+" /></p>
+</div>
+
+<p>
+There is a general heuristic that is useful for deriving theorems like
+these, namely:
+</p>
+<ol class="org-ol">
+<li>First, work backwards from the conclusion, using the introduction
+rules. For example, if you are trying to prove a statement of the
+form <img src="ltxpng/02_Propositional_Logic.org.temp_3a9090234befeadc30f2545de2a44cc4fe6badf4.png" alt="$A \to B$" />, add <img src="ltxpng/02_Propositional_Logic.org.temp_cfd84d0cf5b16a0279ed47d0d5204f0d029e1098.png" alt="$A$" /> to your list of hypotheses and try to
+derive <img src="ltxpng/02_Propositional_Logic.org.temp_d97dc406cb5606cb9d7e849c11adc553d50b79a6.png" alt="$B$" />. If you are trying to prove a statement of the form <img src="ltxpng/02_Propositional_Logic.org.temp_be31c611b4efedbbae42e918c199920ff2338806.png" alt="$A
+   \wedge B$" />, use the and-introduction rule to reduce your task to
+proving <img src="ltxpng/02_Propositional_Logic.org.temp_cfd84d0cf5b16a0279ed47d0d5204f0d029e1098.png" alt="$A$" />, and then proving <img src="ltxpng/02_Propositional_Logic.org.temp_d97dc406cb5606cb9d7e849c11adc553d50b79a6.png" alt="$B$" />.</li>
+<li>When you have run out things to do in the first step, use
+elimination rules to work forwards. If you have hypotheses <img src="ltxpng/02_Propositional_Logic.org.temp_7fc9f96fc7f04ae5bca5f99e10971c2a7578aa45.png" alt="$A \to
+   B$" /> and <img src="ltxpng/02_Propositional_Logic.org.temp_cfd84d0cf5b16a0279ed47d0d5204f0d029e1098.png" alt="$A$" />, apply modus ponens to derive <img src="ltxpng/02_Propositional_Logic.org.temp_d97dc406cb5606cb9d7e849c11adc553d50b79a6.png" alt="$B$" />. If you have a
+hypothesis <img src="ltxpng/02_Propositional_Logic.org.temp_454a2b03e9bbd58443ca50360be2588e72d2d909.png" alt="$A \vee B$" />, use or elimination and try to prove any open
+goals by splitting on cases, considering <img src="ltxpng/02_Propositional_Logic.org.temp_cfd84d0cf5b16a0279ed47d0d5204f0d029e1098.png" alt="$A$" /> in one case and <img src="ltxpng/02_Propositional_Logic.org.temp_d97dc406cb5606cb9d7e849c11adc553d50b79a6.png" alt="$B$" /> in
+the other.</li>
+<li>If all else fails, use a proof by contradiction.</li>
+</ol>
+
+<p>
+When writing expressions in symbolic logic, we will adopt the an order
+of operations, which allow us to drop superfluous parentheses. When
+parsing an expression:
+&#x2013; negation binds most tightly
+&#x2013; then conjunctions and disjunctions, from right to left
+&#x2013; and finally implications and bi-implications.
+So, for example, the expression <img src="ltxpng/02_Propositional_Logic.org.temp_ace3b80f722e8c2d279d113e8832219bed35dd64.png" alt="$\neg A \vee B \to C \wedge D$" /> is
+understood as <img src="ltxpng/02_Propositional_Logic.org.temp_e22bf21dac5de9df570744886f83a72f05a6b736.png" alt="$((\neg A) \vee B) \to (C \wedge D)$" />
+</p>
+
+<p>
+The next proof shows that if a conclusion, <img src="ltxpng/02_Propositional_Logic.org.temp_d5420fe138f4d39b6f52f71250e99e0a36aaaab5.png" alt="$C$" />, follows from <img src="ltxpng/02_Propositional_Logic.org.temp_cfd84d0cf5b16a0279ed47d0d5204f0d029e1098.png" alt="$A$" /> and
+<img src="ltxpng/02_Propositional_Logic.org.temp_d97dc406cb5606cb9d7e849c11adc553d50b79a6.png" alt="$B$" />, then it follows from their conjunction.
+</p>
+
+<div class="figure">
+<p><img src="ltxpng/02_Propositional_Logic.org.temp_30cc88a8d5f5f5e45ca9836a9f3d95e42230422d.png" alt="\begin{prooftree}
+\AXM{}
+\RLM{y}
+\UIM{A \to (B \to C)}
+\AXM{}
+\RLM{x}
+\UIM{A \wedge B}
+\UIM{A}
+\BIM{B \to C}
+\AXM{}
+\RLM{x}
+\UIM{A \wedge B}
+\UIM{B}
+\BIM{C}
+\RLM{x}
+\UIM{A \wedge B \to C}
+\RLM{y}
+\UIM{(A \to (B \to C)) \to
+(A \wedge B \to C)}
+\end{prooftree}
+" /></p>
+</div>
+<p>
+The conclusion of the next proof can be interpreted as saying that if
+it is not the case that one of <img src="ltxpng/02_Propositional_Logic.org.temp_cfd84d0cf5b16a0279ed47d0d5204f0d029e1098.png" alt="$A$" /> or <img src="ltxpng/02_Propositional_Logic.org.temp_d97dc406cb5606cb9d7e849c11adc553d50b79a6.png" alt="$B$" /> is true, then they are both
+false.
+</p>
+
+<div class="figure">
+<p><img src="ltxpng/02_Propositional_Logic.org.temp_eed43b400206f7beca8fb4634903caadceef16d9.png" alt="\begin{prooftree}
+\AXM{}
+\RLM{z}
+\UIM{\lnot(A \vee B)}
+\AXM{}
+\RLM{x}
+\UIM{A}
+\UIM{A \vee B}
+\BIM{\bot}
+\RLM{x}
+\UIM{\lnot A}
+\AXM{}
+\RLM{z}
+\UIM{\lnot(A \vee B)}
+\AXM{}
+\RLM{y}
+\UIM{B}
+\UIM{A \vee B}
+\BIM{\bot}
+\RLM{y}
+\UIM{\lnot B}
+\BIM{\lnot A \wedge \lnot B}
+\RLM{z}
+\UIM{\lnot(A \vee B) \to \lnot A \wedge \lnot B}
+\end{prooftree}
+" /></p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline12" class="outline-3">
+<h3 id="orgheadline12"><span class="section-number-3"> 2.5</span> Writing Proofs in Lean</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+We will see that Lean has mechanisms for modeling proofs at a higher
+level than natural deduction derivations. At the same time, you can
+also carry out low-level inferences, and carry out proofs that mirror
+natural deduction proofs quite closely. Here is a Lean representation
+of the first example in the previous section:
+</p>
+<div class="org-src-container">
+<juicy-ace-editor id='lean-juicy-ace-editor-11' mode="ace/mode/lean" readonly="true">variables (A B C : Prop)
+
+example : A ∧ (B ∨ C) → (A ∧ B) ∨ (A ∧ C) :=
+assume H₁ : A ∧ (B ∨ C),
+have H₂ : A, from and.left H₁,
+have H₃ : B ∨ C, from and.right H₁,
+show (A ∧ B) ∨ (A ∧ C), from 
+  or.elim H₃
+    (assume H₄ : B,
+      have H₅ : A ∧ B, from and.intro H₂ H₄,
+      show (A ∧ B) ∨ (A ∧ C), from or.inl H₅)
+    (assume H₄ : C,
+      have H₅ : A ∧ C, from and.intro H₂ H₄,
+      show (A ∧ B) ∨ (A ∧ C), from or.inr H₅)
+</juicy-ace-editor><div id='lean-full-code-11' style='display:none'>variables (A B C : Prop)
+
+example : A ∧ (B ∨ C) → (A ∧ B) ∨ (A ∧ C) :=
+assume H₁ : A ∧ (B ∨ C),
+have H₂ : A, from and.left H₁,
+have H₃ : B ∨ C, from and.right H₁,
+show (A ∧ B) ∨ (A ∧ C), from 
+  or.elim H₃
+    (assume H₄ : B,
+      have H₅ : A ∧ B, from and.intro H₂ H₄,
+      show (A ∧ B) ∨ (A ∧ C), from or.inl H₅)
+    (assume H₄ : C,
+      have H₅ : A ∧ C, from and.intro H₂ H₄,
+      show (A ∧ B) ∨ (A ∧ C), from or.inr H₅)
+</div><div class='no-print' align="left"><button type="button" onclick="invoke_leanjs($('#lean-full-code-11').text());">Try it yourself &raquo;</button></div>
+</div>
+<p>
+The first line declares propositional variables <code>A</code>, <code>B</code>, and <code>C</code>. The
+line that begins with the keyword <code>example</code> declares the theorem to be
+proved, and the notation <code>:=</code> indicates that the proof will
+follow. The line breaks and indentation is only for the purposes of
+readability; Lean would do just was well if the entire proof were
+written as one run-on line.
+</p>
+
+<p>
+Here are some additional notes:
+</p>
+
+<p>
+&#x2013; It is often important to name a theorem for future proof. Lean
+   allows us to do that, using one of the keywords <code>theorem</code>, <code>lemma</code>,
+   <code>proposition</code>, <code>corollary</code>, followed by the name of the proof.
+</p>
+
+<p>
+&#x2013; You can omit a label in a <code>have</code> statement. You can then refer to
+   that fact using the label <code>this</code>, until the next anonymoyus
+   <code>have</code>. Alternatively, at any point later in the proof, you can
+   refer to the fact by putting the assertion between backticks.
+</p>
+
+<p>
+&#x2013; One can also omit the label in an <code>assumption</code> by using the keyword
+   <code>suppose</code> instead.
+</p>
+
+<p>
+With these features, the previous proof can be written as follows:
+</p>
+<div class="org-src-container">
+<juicy-ace-editor id='lean-juicy-ace-editor-12' mode="ace/mode/lean" readonly="true">variables (A B C : Prop)
+
+theorem my_theorem : A ∧ (B ∨ C) → (A ∧ B) ∨ (A ∧ C) :=
+assume H₁ : A ∧ (B ∨ C),
+have A, from and.left H₁,
+have B ∨ C, from and.right H₁,
+show (A ∧ B) ∨ (A ∧ C), from
+  or.elim `B ∨ C`
+    (suppose B,
+      have A ∧ B, from and.intro `A` `B`,
+      show (A ∧ B) ∨ (A ∧ C), from or.inl this)
+    (suppose C,
+      have A ∧ C, from and.intro `A` `C`,
+      show (A ∧ B) ∨ (A ∧ C), from or.inr this)
+</juicy-ace-editor><div id='lean-full-code-12' style='display:none'>variables (A B C : Prop)
+
+theorem my_theorem : A ∧ (B ∨ C) → (A ∧ B) ∨ (A ∧ C) :=
+assume H₁ : A ∧ (B ∨ C),
+have A, from and.left H₁,
+have B ∨ C, from and.right H₁,
+show (A ∧ B) ∨ (A ∧ C), from
+  or.elim `B ∨ C`
+    (suppose B,
+      have A ∧ B, from and.intro `A` `B`,
+      show (A ∧ B) ∨ (A ∧ C), from or.inl this)
+    (suppose C,
+      have A ∧ C, from and.intro `A` `C`,
+      show (A ∧ B) ∨ (A ∧ C), from or.inr this)
+</div><div class='no-print' align="left"><button type="button" onclick="invoke_leanjs($('#lean-full-code-12').text());">Try it yourself &raquo;</button></div>
+</div>
+
+<p>
+In fact, such a presentation provides Lean with more information than
+is really necessary to construct an axiomatic proof. The word <code>assume</code>
+can be replaced by the symbol <code>λ</code>, assertions can be omitted from an
+<code>assume</code> when they can be inferred from context, the justification of
+a have statement can be inserted in places where the label was
+otherwise used, and one can omit the <code>show</code> clauses, giving only the
+justification. As a result, the previous proof can be written in an
+extremely abbreviated form:
+</p>
+<div class="org-src-container">
+<juicy-ace-editor id='lean-juicy-ace-editor-13' mode="ace/mode/lean" readonly="true">variables (A B C : Prop)
+
+example : A ∧ (B ∨ C) → (A ∧ B) ∨ (A ∧ C) :=
+λ H₁, or.elim (and.right H₁)
+  (λ H₄, or.inl (and.intro (and.left H₁) H₄))
+  (λ H₄, or.inr (and.intro (and.left H₁) H₄))
+</juicy-ace-editor><div id='lean-full-code-13' style='display:none'>variables (A B C : Prop)
+
+example : A ∧ (B ∨ C) → (A ∧ B) ∨ (A ∧ C) :=
+λ H₁, or.elim (and.right H₁)
+  (λ H₄, or.inl (and.intro (and.left H₁) H₄))
+  (λ H₄, or.inr (and.intro (and.left H₁) H₄))
+</div><div class='no-print' align="left"><button type="button" onclick="invoke_leanjs($('#lean-full-code-13').text());">Try it yourself &raquo;</button></div>
+</div>
+<p>
+Such proofs tend to be harder to write, read, understand, maintain,
+and debug, however, and so we will tend to favor structure and
+readability over brevity.
+</p>
+
+<p>
+The next proof in the previous section can be rendered in Lean as
+follows:
+</p>
+<div class="org-src-container">
+<juicy-ace-editor id='lean-juicy-ace-editor-14' mode="ace/mode/lean" readonly="true">variables (A B C : Prop)
+
+example : (A → (B → C)) → (A ∧ B → C) :=
+assume H₁ : A → B → C,
+assume H₂ : A ∧ B,
+show C, from H₁ (and.left H₂) (and.right H₂)
+</juicy-ace-editor><div id='lean-full-code-14' style='display:none'>variables (A B C : Prop)
+
+example : (A → (B → C)) → (A ∧ B → C) :=
+assume H₁ : A → B → C,
+assume H₂ : A ∧ B,
+show C, from H₁ (and.left H₂) (and.right H₂)
+</div><div class='no-print' align="left"><button type="button" onclick="invoke_leanjs($('#lean-full-code-14').text());">Try it yourself &raquo;</button></div>
+</div>
+<p>
+And the last proof can be rendered as follows:
+</p>
+<div class="org-src-container">
+<juicy-ace-editor id='lean-juicy-ace-editor-15' mode="ace/mode/lean" readonly="true">variables (A B C : Prop)
+
+example : ¬ (A ∨ B) → ¬ A ∧ ¬ B :=
+assume H : ¬ (A ∨ B),
+have ¬ A, from
+  suppose A,
+  have A ∨ B, from or.inl `A`,
+  show false, from H this,
+have ¬ B, from
+  suppose B,
+  have A ∨ B, from or.inr `B`,
+  show false, from H this,
+show ¬ A ∧ ¬ B, from and.intro `¬ A` `¬ B`
+</juicy-ace-editor><div id='lean-full-code-15' style='display:none'>variables (A B C : Prop)
+
+example : ¬ (A ∨ B) → ¬ A ∧ ¬ B :=
+assume H : ¬ (A ∨ B),
+have ¬ A, from
+  suppose A,
+  have A ∨ B, from or.inl `A`,
+  show false, from H this,
+have ¬ B, from
+  suppose B,
+  have A ∨ B, from or.inr `B`,
+  show false, from H this,
+show ¬ A ∧ ¬ B, from and.intro `¬ A` `¬ B`
+</div><div class='no-print' align="left"><button type="button" onclick="invoke_leanjs($('#lean-full-code-15').text());">Try it yourself &raquo;</button></div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline13" class="outline-3">
+<h3 id="orgheadline13"><span class="section-number-3"> 2.6</span> Writing Informal Proofs</h3>
+</div>
+
+<div id="outline-container-orgheadline14" class="outline-3">
+<h3 id="orgheadline14"><span class="section-number-3"> 2.7</span> Derived Rules and Coarser Steps</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+In the examples above, we showed that, given <img src="ltxpng/02_Propositional_Logic.org.temp_454a2b03e9bbd58443ca50360be2588e72d2d909.png" alt="$A \vee B$" /> and <img src="ltxpng/02_Propositional_Logic.org.temp_c9fc0b9f87a04276e5274737b465662205a69233.png" alt="$\neg A$" />,
+we can derive <img src="ltxpng/02_Propositional_Logic.org.temp_d97dc406cb5606cb9d7e849c11adc553d50b79a6.png" alt="$B$" /> in natural deduction. This is a common pattern of
+inference, and, having justified it once, one might reasonably want to
+use it freely as a new one-step inference. Similarly, having proved <img src="ltxpng/02_Propositional_Logic.org.temp_35693d56cafba26767dfd32f68fdcf7cbdea19cb.png" alt="$A
+\to B$" /> equivalent to <img src="ltxpng/02_Propositional_Logic.org.temp_6581c5cc6ec29087c217297d610fff2f401c9596.png" alt="$\neg A \vee B$" />, or <img src="ltxpng/02_Propositional_Logic.org.temp_15b57da155bd200da977f355320d65d985c35b6e.png" alt="$\neg (A \vee B)$" /> equivalent
+to <img src="ltxpng/02_Propositional_Logic.org.temp_ead4c4fd3d650a492a33f2d0c7a926ea8ecba594.png" alt="$\neg A \wedge \neg B$" />, one might feel justified in replacing one
+by the other in any expression.
+</p>
+
+<p>
+Indeed, this is how informal mathematics works: even if we start with
+some basic rules of inference, we learn to recognize more complex
+patterns and apply them freely. A single step in the informal argument in
+the solution to "Malice and Alice," or any mathematical proof, usually
+requires many more steps in a formal calculus. Moreover, in ordinary
+mathematics, one we prove a proposition or theorem, we can freely
+invoke it in another proof later on.
+</p>
+
+<p>
+In symbolic logic, "derived rules".
+</p>
+
+<p>
+In Lean, naming theorems and reusing them. (Also, eventually, automation.)
+</p>
+
+
+<p>
+To summarize:
+</p>
+
+<p>
+&#x2013; When we ask you to prove something in natural deduction, our goal
+   is to make you work with the precise, formal rules of the
+   system. So you should not appeal to external rules unless we
+   explicitly say so.
+</p>
+
+<p>
+&#x2013; When writing informal proofs, it is a judgment call as to what
+   prior patterns of reasoning and background facts you may appeal
+   to. In a classroom setting, the goal may be to demonstrate mastery
+   of the subject to the instructors, in which case, context should
+   dictate what is allowable (and it is always a good idea to err on
+   the side of caution). In real life, your goal is to convince your
+   target audience, and you will have to rely on convention and
+   experience to judge what patterns of inference you can put forth,
+   and how much detail you need to use.
+</p>
+
+<p>
+&#x2013; In interactive theorem proving, the main goal is to have the
+   computer certify the proof as correct, and in that respect,
+   automation and facts from the library are fair game. In this class,
+   we will try to be explicit about what we would like you to use in 
+   the exercises we assign.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline15" class="outline-3">
+<h3 id="orgheadline15"><span class="section-number-3"> 2.8</span> Truth Tables and Semantics</h3>
+<div class="outline-text-3" id="text-1-8">
+<p>
+In the previous sections, we've seen how to prove logical formulas from hypotheses.
+If the hypotheses are true, the derived formula must be true as well. A formula
+that can be derived from no hypotheses is said to be <i>valid</i>: for example, 
+<img src="ltxpng/02_Propositional_Logic.org.temp_585c86a387e7ad9adf7775bb8281afb8d761dbd1.png" alt="$A \to A$" /> is true no matter what we suppose about <img src="ltxpng/02_Propositional_Logic.org.temp_cfd84d0cf5b16a0279ed47d0d5204f0d029e1098.png" alt="$A$" />.
+</p>
+
+<p>
+Not every sentence is valid, of course. Earlier we saw the example <img src="ltxpng/02_Propositional_Logic.org.temp_3a9090234befeadc30f2545de2a44cc4fe6badf4.png" alt="$A \to B$" />.
+We cannot derive this formula without some extra assumptions about <img src="ltxpng/02_Propositional_Logic.org.temp_cfd84d0cf5b16a0279ed47d0d5204f0d029e1098.png" alt="$A$" /> and <img src="ltxpng/02_Propositional_Logic.org.temp_d97dc406cb5606cb9d7e849c11adc553d50b79a6.png" alt="$B$" />.
+Try it:
+</p>
+
+<div class="org-src-container">
+<juicy-ace-editor id='lean-juicy-ace-editor-16' mode="ace/mode/lean" readonly="true">variables A B : Prop
+
+example : A → B :=
+assume H : A,
+show B, from sorry
+</juicy-ace-editor><div id='lean-full-code-16' style='display:none'>variables A B : Prop
+
+example : A → B :=
+assume H : A,
+show B, from sorry
+</div><div class='no-print' align="left"><button type="button" onclick="invoke_leanjs($('#lean-full-code-16').text());">Try it yourself &raquo;</button></div>
+</div>
+
+<p>
+Without some more information, there's no argument we could put in place of the
+"sorry" to complete this proof. After all, <img src="ltxpng/02_Propositional_Logic.org.temp_d97dc406cb5606cb9d7e849c11adc553d50b79a6.png" alt="$B$" /> could be false!
+</p>
+
+<p>
+What do we mean by "false," exactly? Notice that we've been careful not to use
+the words "true" and "false" before now. Deductions and formal proofs are
+<i>syntactic</i> ideas- that is, they have to do with the symbols and symbolic
+structure of the formulas involved. Truth is a <i>semantic</i> notion- it ascribes
+some extra-logical <i>meaning</i> to they symbols involved.
+</p>
+
+<p>
+Syntactically, we were able to ask and answer questions like the following:
+</p>
+<ul class="org-ul">
+<li>Can I derive a certain formula from certain hypotheses?</li>
+<li>How do I derive a certain formula from certain hypotheses?</li>
+<li>What formulas can I derive from certain hypotheses?</li>
+</ul>
+
+<p>
+The questions we consider semantically are slightly different:
+</p>
+<ul class="org-ul">
+<li>Given a truth assignment for propositional variables, is a certain formula
+true or false?</li>
+<li>Under what conditions is a certain formula true or false?</li>
+</ul>
+
+<p>
+Our notions of syntax and semantics have developed carefully, so that they exist
+in harmony. We'll expand on this in the next section. For now, we'll discuss the
+basic methods we use to answer semantic questions.
+</p>
+
+<p>
+The first notion we'll need is that of a <i>truth value</i>. Conveniently, we know
+our two truth values already: they're just "true" and "false." (We'll use the
+symbols <img src="ltxpng/02_Propositional_Logic.org.temp_5e63c8abf3b0c42012365b5702f80124df3a70e4.png" alt="$\top$" /> and <img src="ltxpng/02_Propositional_Logic.org.temp_7bea1d03799b42f9b799647895fded7894b866bd.png" alt="$\bot$" />, respectively.) (Jeremy, will we? Do you prefer other notation?)
+</p>
+
+<p>
+In this class, we'll adopt a "classical" notion of truth. This notion comes with
+many implications. For now, though, it means only the following: any proposition
+is either true or false, but not both. This means a proposition cannot be neither
+true nor false.
+</p>
+
+<p>
+This binary conception of truth corresponds to the syntactic tautology <img src="ltxpng/02_Propositional_Logic.org.temp_9ede797ed8eed1b96b7d91381cfb9fabfa220c0f.png" alt="$A \vee \not A$" />.
+Semantically, we read this sentence as saying "either <img src="ltxpng/02_Propositional_Logic.org.temp_cfd84d0cf5b16a0279ed47d0d5204f0d029e1098.png" alt="$A$" /> is true, or <img src="ltxpng/02_Propositional_Logic.org.temp_c26c2d0c36eb5b7b9af2a1766d695439dafba78d.png" alt="$\not A$" /> is
+true." Since <img src="ltxpng/02_Propositional_Logic.org.temp_c26c2d0c36eb5b7b9af2a1766d695439dafba78d.png" alt="$\not A$" /> is true exactly when <img src="ltxpng/02_Propositional_Logic.org.temp_cfd84d0cf5b16a0279ed47d0d5204f0d029e1098.png" alt="$A$" /> is false, it equivalently says
+"either <img src="ltxpng/02_Propositional_Logic.org.temp_cfd84d0cf5b16a0279ed47d0d5204f0d029e1098.png" alt="$A$" /> is true, or <img src="ltxpng/02_Propositional_Logic.org.temp_cfd84d0cf5b16a0279ed47d0d5204f0d029e1098.png" alt="$A$" /> is false."
+</p>
+
+<p>
+The next notion we'll need is that of a <i>truth assignment</i>. A truth assignment
+simply tells us which atomic statements are true, and which are false. In formal logic,
+this amounts to a mapping from our propositional letters <img src="ltxpng/02_Propositional_Logic.org.temp_cfd84d0cf5b16a0279ed47d0d5204f0d029e1098.png" alt="$A$" />, <img src="ltxpng/02_Propositional_Logic.org.temp_d97dc406cb5606cb9d7e849c11adc553d50b79a6.png" alt="$B$" />, etc. to the set
+of truth values <img src="ltxpng/02_Propositional_Logic.org.temp_f8de1a13623588006fbc9b7d0096a41b75d66af7.png" alt="$\{ \top, \bot \}$" />. For instance,
+</p>
+<ul class="org-ul">
+<li><img src="ltxpng/02_Propositional_Logic.org.temp_2009ee7264e487321849ae49a6e4a0e3e0b06e1d.png" alt="$A := \top$" /></li>
+<li><img src="ltxpng/02_Propositional_Logic.org.temp_26142b44b10500381e4803673887237ceab20000.png" alt="$B := \top$" /></li>
+<li><img src="ltxpng/02_Propositional_Logic.org.temp_fdb1d7a459ab0fb582e611543e42020b878b2ee2.png" alt="$C := \bot$" /></li>
+</ul>
+<p>
+<img src="ltxpng/02_Propositional_Logic.org.temp_c1f00bb1ed6360b2052f99459ec92783ac969857.png" alt="$\vdots$" />
+</p>
+
+<p>
+is a (partial) truth assignment. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline16" class="outline-3">
+<h3 id="orgheadline16"><span class="section-number-3"> 2.9</span> A Complete Proof System</h3>
+</div>
+
+
+<div id="outline-container-orgheadline17" class="outline-3">
+<h3 id="orgheadline17"><span class="section-number-3"> 2.10</span> Exercises</h3>
+</div>
+</div>
+</div>
+</body>
+</html>
